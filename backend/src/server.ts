@@ -2,6 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import authRoutes from "./routes/auth"
+import ticketRoutes from "./routes/ticket"
+
 
 
 dotenv.config(); 
@@ -18,6 +21,10 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
     .catch((err) => {
         console.error("MongoDB connection error:", err);
     });
+
+app.use("/api/auth", authRoutes);
+app.use("/api/tickets", ticketRoutes);
+
 
 
 const port = process.env.PORT || 5000;
