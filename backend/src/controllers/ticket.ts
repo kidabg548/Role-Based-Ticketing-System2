@@ -35,36 +35,36 @@ export const createTicket = async (
 };
 
 export const getTickets = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  try {
-    let tickets;
-
-    if (req.userRole === "admin") {
-      tickets = await Ticket.find();
-    } else if (req.userId) {
-      tickets = await Ticket.find({ userId: req.userId });
-    } else {
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      let tickets;
+  
+      if (req.userRole === "admin") {
+        tickets = await Ticket.find().populate('userId', 'firstName lastName email'); 
+      } else if (req.userId) {
+        tickets = await Ticket.find({ userId: req.userId }).populate('userId', 'firstName lastName email');
+      } else {
+        res
+          .status(400)
+          .json({ message: "User ID is required for non-admin users." });
+        return;
+      }
+  
+      if (!tickets || tickets.length === 0) {
+        res.status(404).json({ message: "No tickets found." });
+        return;
+      }
+  
+      res.status(200).json(tickets);
+    } catch (error) {
+      console.error("Error retrieving tickets:", error);
       res
-        .status(400)
-        .json({ message: "User ID is required for non-admin users." });
-      return;
+        .status(500)
+        .json({ message: "Failed to retrieve tickets. Please try again later." });
     }
-
-    if (!tickets) {
-      res.status(404).json({ message: "No tickets found." });
-      return;
-    }
-
-    res.status(200).json(tickets);
-  } catch (error) {
-    console.error("Error retrieving tickets:", error);
-    res
-      .status(500)
-      .json({ message: "Failed to retrieve tickets. Please try again later." });
-  }
-};
+  };
 
 export const getTicketById = async (
   req: Request,
