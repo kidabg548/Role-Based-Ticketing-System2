@@ -13,6 +13,7 @@ import CreateTicketForm from "./pages/createTicket";
 import TicketsPage from "./pages/Tickets";
 import Layout from "./components/layout";
 import ProfilePage from "./pages/profilePage";
+// import AdminDashboard from "./pages/Admin";
 
 const App: React.FC = () => {
   const { isLoggedIn } = useAppContext();
@@ -55,6 +56,16 @@ const App: React.FC = () => {
                 </Layout>
               }
             />
+            {/* <Route
+              path="/admin"
+              element={
+                <Layout>
+                  <AdminDashboard />{" "}
+                </Layout>
+              }
+            /> */}
+
+
             <Route
               path="/tickets"
               element={
