@@ -1,53 +1,149 @@
-import React, { useState } from 'react';
-import { AuthLayout, AnimationSide, FormSide, Input, Button, ErrorMessage } from '../components'; // Import all from one file
+import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "react-query";
+import * as apiClient from "../api-client";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAppContext } from "../contexts/AppContext";
 
-const Login: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+export type LoginFormData = {
+  email: string;
+  password: string;
+};
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulate login (replace with actual authentication logic)
-    if (email === 'test@example.com' && password === 'password') {
-      alert('Login successful!');  // Replace with redirect
-    } else {
-      setError('Invalid credentials');
-    }
-  };
+const Login = () => {
+  const queryClient = useQueryClient();
+  const { showToast } = useAppContext();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<LoginFormData>();
+
+  const mutation = useMutation(apiClient.login, {
+    onSuccess: async () => {
+      showToast({ message: "Login Successful!", type: "SUCCESS" });
+      await queryClient.invalidateQueries("validateToken");
+      navigate(from);
+    },
+    onError: (error: Error) => {
+      showToast({ message: error.message, type: "ERROR" });
+    },
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    mutation.mutate(data);
+  });
 
   return (
-    <AuthLayout
-      animationSide={<AnimationSide />}
-      formSide={
-        <FormSide>
-          <h2 className="text-2xl font-bold mb-4">Login</h2>
-          <form onSubmit={handleSubmit}>
-            <Input
-              id="email"
-              label="Email"
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
+        <h2 className="text-4xl font-bold text-center mb-6">Login</h2>
+        <p className="text-gray-600 text-center mb-6">
+          For security, please log in to access your information
+        </p>
+
+        <form className="space-y-5" onSubmit={onSubmit}>
+          <div className="flex justify-center mb-4">
+            <button
+              type="button"
+              className="px-4 py-2 border-b-2 border-blue-600 text-blue-600 font-medium"
+            >
+              EMAIL
+            </button>
+            <button
+              type="button"
+              className="px-4 py-2 text-gray-500 font-medium"
+            >
+              MOBILE
+            </button>
+          </div>
+
+          <div>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Email
+            </label>
+            <input
               type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              className={`border rounded w-full py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              }`}
+              {...register("email", { required: "This field is required" })}
             />
-            <Input
-              id="password"
-              label="Password"
+            {errors.email && (
+              <span className="text-red-500 text-sm">
+                {errors.email.message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Password
+            </label>
+            <input
               type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              className={`border rounded w-full py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                errors.password ? "border-red-500" : "border-gray-300"
+              }`}
+              {...register("password", {
+                required: "This field is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+              })}
             />
-            <ErrorMessage message={error} />
-            <Button type="submit">Login</Button>
-          </form>
-          <p className="mt-4 text-sm">
-            Don't have an account? <a href="/signup" className="text-blue-500">Sign up</a>
-          </p>
-        </FormSide>
-      }
-    />
+            {errors.password && (
+              <span className="text-red-500 text-sm">
+                {errors.password.message}
+              </span>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white text-xl py-2 rounded-lg hover:bg-blue-500 transition-colors duration-300"
+          >
+            Log in
+          </button>
+
+          <div className="flex justify-between items-center mt-4">
+            <Link
+              to="/register"
+              className="text-sm text-blue-600 hover:underline"
+            >
+              Create an account
+            </Link>
+            <Link
+              to="/forgot-password"
+              className="text-sm text-blue-600 hover:underline flex items-center"
+            >
+              <span className="mr-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 13l-3 3m0 0l-3-3m3 3V8m0 8h8.5M15 21H8.5A4.5 4.5 0 014 16.5v-9A4.5 4.5 0 018.5 3H15"
+                  />
+                </svg>
+              </span>
+              Forgot password?
+            </Link>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 
