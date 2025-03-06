@@ -6,6 +6,7 @@ import { useAppContext } from "./contexts/AppContext";
 import Home from "./pages/Home";
 import CreateTicketForm from "./pages/createTicket";
 import TicketsPage from "./pages/Tickets";
+import Layout from "./components/layout";
 
 const App: React.FC = () => {
   const { isLoggedIn } = useAppContext();
@@ -13,16 +14,14 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route path="/login" element={<Layout><Login /></Layout>} />
+        <Route path="/signup" element={<Layout><Signup /></Layout>} />
 
         {isLoggedIn && (
           <>
-            <Route path="/create/ticket" element={<CreateTicketForm />} />
-            <Route path="/tickets" element={<TicketsPage />} />
-
-
+            <Route path="/create/ticket" element={ <Layout><CreateTicketForm /> </Layout>} />
+            <Route path="/tickets" element={<Layout><TicketsPage /></Layout>} />
             
           </>
         )}

@@ -3,16 +3,16 @@ import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 import * as apiClient from "../api-client";
-import { Menu } from '@headlessui/react';
-import { motion } from 'framer-motion';
-import { 
-  Ticket, 
-  AlertCircle, 
-  Clock, 
-  Tag, 
-  ChevronDown, 
-  Loader2
-} from 'lucide-react';
+import { Menu, Transition } from "@headlessui/react";
+import { motion } from "framer-motion";
+import {
+  Ticket,
+  AlertCircle,
+  Clock,
+  ChevronDown,
+  Loader2,
+} from "lucide-react";
+import { Fragment } from "react";
 
 export interface CreateTicketData {
   title: string;
@@ -20,6 +20,13 @@ export interface CreateTicketData {
   category: string;
   priority: "Low" | "Medium" | "High" | "Critical";
 }
+
+const priorityColors: { [key: string]: string } = {
+  Low: "bg-green-400",
+  Medium: "bg-yellow-400",
+  High: "bg-orange-400",
+  Critical: "bg-red-400",
+};
 
 const CreateTicketForm = () => {
   const queryClient = useQueryClient();
@@ -30,7 +37,11 @@ const CreateTicketForm = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue,
+    watch,
   } = useForm<CreateTicketData>();
+
+  const priorityValue = watch("priority");
 
   const mutation = useMutation(apiClient.createTicket, {
     onSuccess: async () => {
@@ -50,18 +61,22 @@ const CreateTicketForm = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Create New Ticket</h1>
-          <p className="text-gray-600">Submit a new support ticket and we'll help you resolve your issue</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            Create New Ticket
+          </h1>
+          <p className="text-gray-600">
+            Submit a new support ticket and we'll help you resolve your issue
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Sidebar */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="lg:col-span-1"
@@ -73,7 +88,9 @@ const CreateTicketForm = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold">New Ticket</h3>
-                  <p className="text-sm text-gray-500">Create support request</p>
+                  <p className="text-sm text-gray-500">
+                    Create support request
+                  </p>
                 </div>
               </div>
 
@@ -91,14 +108,11 @@ const CreateTicketForm = () => {
               <div className="border-t pt-4">
                 <h4 className="font-medium mb-3">Priority Levels</h4>
                 <div className="space-y-2">
-                  {['Low', 'Medium', 'High', 'Critical'].map((level) => (
+                  {["Low", "Medium", "High", "Critical"].map((level) => (
                     <div key={level} className="flex items-center space-x-2">
-                      <div className={`w-2 h-2 rounded-full ${
-                        level === 'Low' ? 'bg-green-400' :
-                        level === 'Medium' ? 'bg-yellow-400' :
-                        level === 'High' ? 'bg-orange-400' :
-                        'bg-red-400'
-                      }`} />
+                      <div
+                        className={`w-2 h-2 rounded-full ${priorityColors[level]}`}
+                      />
                       <span className="text-sm text-gray-600">{level}</span>
                     </div>
                   ))}
@@ -108,7 +122,7 @@ const CreateTicketForm = () => {
           </motion.div>
 
           {/* Main Form */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="lg:col-span-2"
@@ -125,7 +139,9 @@ const CreateTicketForm = () => {
                     placeholder="Brief description of your issue"
                   />
                   {errors.title && (
-                    <span className="text-sm text-red-500 mt-1">{errors.title.message}</span>
+                    <span className="text-sm text-red-500 mt-1">
+                      {errors.title.message}
+                    </span>
                   )}
                 </div>
 
@@ -134,13 +150,17 @@ const CreateTicketForm = () => {
                     Description
                   </label>
                   <textarea
-                    {...register("description", { required: "Description is required" })}
+                    {...register("description", {
+                      required: "Description is required",
+                    })}
                     rows={5}
                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
                     placeholder="Provide detailed information about your issue"
                   />
                   {errors.description && (
-                    <span className="text-sm text-red-500 mt-1">{errors.description.message}</span>
+                    <span className="text-sm text-red-500 mt-1">
+                      {errors.description.message}
+                    </span>
                   )}
                 </div>
 
@@ -150,12 +170,16 @@ const CreateTicketForm = () => {
                       Category
                     </label>
                     <input
-                      {...register("category", { required: "Category is required" })}
+                      {...register("category", {
+                        required: "Category is required",
+                      })}
                       className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
                       placeholder="Select category"
                     />
                     {errors.category && (
-                      <span className="text-sm text-red-500 mt-1">{errors.category.message}</span>
+                      <span className="text-sm text-red-500 mt-1">
+                        {errors.category.message}
+                      </span>
                     )}
                   </div>
 
@@ -163,16 +187,67 @@ const CreateTicketForm = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Priority
                     </label>
-                    <select
-                      {...register("priority", { required: "Priority is required" })}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    <Menu
+                      as="div"
+                      className="relative inline-block text-left w-full"
                     >
-                      {['Low', 'Medium', 'High', 'Critical'].map((priority) => (
-                        <option key={priority} value={priority}>{priority}</option>
-                      ))}
-                    </select>
+                      <div>
+                        <Menu.Button className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 flex items-center justify-between">
+                          {priorityValue ? priorityValue : "Select Priority"}
+                          <ChevronDown
+                            className="h-5 w-5 text-gray-500"
+                            aria-hidden="true"
+                          />
+                        </Menu.Button>
+                      </div>
+
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="absolute right-0 mt-2 w-full origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          {["Low", "Medium", "High", "Critical"].map(
+                            (priority) => (
+                              <Menu.Item key={priority}>
+                                {({ active }) => (
+                                  <button
+                                    onClick={() =>
+                                      setValue(
+                                        "priority",
+                                        priority as
+                                          | "Low"
+                                          | "Medium"
+                                          | "High"
+                                          | "Critical"
+                                      )
+                                    }
+                                    className={`${
+                                      active
+                                        ? "bg-gray-100 text-gray-900"
+                                        : "text-gray-700"
+                                    } group flex items-center w-full px-4 py-3 text-sm`}
+                                  >
+                                    <div
+                                      className={`w-2 h-2 rounded-full mr-2 ${priorityColors[priority]}`}
+                                    />
+                                    {priority}
+                                  </button>
+                                )}
+                              </Menu.Item>
+                            )
+                          )}
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
                     {errors.priority && (
-                      <span className="text-sm text-red-500 mt-1">{errors.priority.message}</span>
+                      <span className="text-sm text-red-500 mt-1">
+                        {errors.priority.message}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -189,7 +264,7 @@ const CreateTicketForm = () => {
                         Creating Ticket...
                       </span>
                     ) : (
-                      'Create Ticket'
+                      "Create Ticket"
                     )}
                   </button>
                 </div>
