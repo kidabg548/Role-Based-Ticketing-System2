@@ -216,7 +216,9 @@ const CreateTicketForm = () => {
                               <Menu.Item key={priority}>
                                 {({ active }) => (
                                   <button
-                                    onClick={() =>
+                                    type="button"
+                                    onClick={(e) => {
+                                      e.preventDefault();
                                       setValue(
                                         "priority",
                                         priority as
@@ -224,8 +226,8 @@ const CreateTicketForm = () => {
                                           | "Medium"
                                           | "High"
                                           | "Critical"
-                                      )
-                                    }
+                                      );
+                                    }}
                                     className={`${
                                       active
                                         ? "bg-gray-100 text-gray-900"

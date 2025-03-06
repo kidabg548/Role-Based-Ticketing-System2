@@ -41,6 +41,27 @@ export const login = async (formData: LoginFormData) => {
   return responseBody;
 };
 
+export const getCurrentUser = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/users/me`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+  
+      if (!response.ok) {
+        const responseBody = await response.json();
+        throw new Error(responseBody.message || "Failed to fetch current user");
+      }
+  
+      return await response.json();
+    } catch (error: any) {
+      throw new Error(error.message || "Failed to fetch current user");
+    }
+  };
+
 export const validateToken = async () => {
     const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
         credentials: "include",
