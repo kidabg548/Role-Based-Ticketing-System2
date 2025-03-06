@@ -141,7 +141,6 @@ const Home = () => {
               <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-purple-500 hover:shadow-lg transition-shadow">
                 <Link
                   to="/tickets"
-                  className="bg-white p-6 rounded-xl shadow-md border-l-4 border-purple-500 hover:shadow-lg transition-shadow block"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-semibold text-gray-700">
