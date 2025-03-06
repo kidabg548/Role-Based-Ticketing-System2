@@ -4,8 +4,8 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth"
 import ticketRoutes from "./routes/ticket"
-
-
+import userRoutes from "./routes/user"
+import cors from "cors";
 
 dotenv.config(); 
 
@@ -13,6 +13,12 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+    cors({
+      origin: process.env.FRONTEND_URL,
+    })
+  );
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
     .then(() => {
@@ -24,6 +30,8 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
 
 app.use("/api/auth", authRoutes);
 app.use("/api/tickets", ticketRoutes);
+app.use("/api/users", userRoutes);
+
 
 
 

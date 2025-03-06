@@ -87,4 +87,8 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
+export const validateToken = (req: Request, res: Response) => {
+    res.status(200).json({ userId: req.userId });
+  };
+
 export default router;
