@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import * as apiClient from "../api-client";
 import { Clock, AlertCircle, Plus, Search } from "lucide-react";
 import { ticketType } from "../../../backend/shared/types";
-import TicketModal from "../components/TicketModal";
+import TicketModal from "../components/ticketModal";
 
 const TicketsPage = () => {
   const [tickets, setTickets] = useState<ticketType[]>([]);

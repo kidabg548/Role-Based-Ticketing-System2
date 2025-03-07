@@ -1,7 +1,7 @@
 import { LoginFormData } from "./pages/Login";
 import { SignupFormData } from "./pages/signUp";
-import {ticketType} from "../../backend/shared/types"
 import { CreateTicketData } from "./pages/createTicket";
+import { TicketType } from "./types/types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -77,7 +77,7 @@ export const validateToken = async () => {
   
   export const createTicket = async (
     ticketData: CreateTicketData
-  ): Promise<ticketType> => {
+  ): Promise<TicketType> => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/tickets/create`, {
         method: "POST",
@@ -99,7 +99,7 @@ export const validateToken = async () => {
     }
   };
   
-  export const getTickets = async (): Promise<ticketType[]> => {
+  export const getTickets = async (): Promise<TicketType[]> => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/tickets`, {
         method: "GET",
@@ -120,7 +120,7 @@ export const validateToken = async () => {
   
   export const getTicketById = async (
     ticketId: string
-  ): Promise<ticketType> => {
+  ): Promise<TicketType> => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/tickets/${ticketId}`, {
         method: "GET",
