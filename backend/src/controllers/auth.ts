@@ -107,6 +107,8 @@ export const validateToken = (req: Request, res: Response) => {
 export const logoutUser = (req: Request, res: Response) => {
   res.cookie("auth_token", "", {
     expires: new Date(0),
+    secure: process.env.NODE_ENV === "production", 
+    sameSite: 'none', 
   });
   res.status(200).send({ message: "Logout successful" });
 };
