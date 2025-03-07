@@ -1,21 +1,20 @@
-// src/pages/TicketsPage.tsx
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import * as apiClient from "../api-client";
 import { Clock, AlertCircle, Plus, Search } from "lucide-react";
-import { ticketType } from "../../../backend/shared/types";
 import TicketModal from "../components/ticketModal";
+import { TicketType } from "../types/types";
 
 const TicketsPage = () => {
-  const [tickets, setTickets] = useState<ticketType[]>([]);
+  const [tickets, setTickets] = useState<TicketType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
   const [sortBy, setSortBy] = useState("newest");
-  const [selectedTicket, setSelectedTicket] = useState<ticketType | null>(null); // New state for selected ticket
+  const [selectedTicket, setSelectedTicket] = useState<TicketType | null>(null); // New state for selected ticket
 
   useEffect(() => {
     const fetchTickets = async () => {
@@ -73,12 +72,10 @@ const TicketsPage = () => {
     },
   };
 
-  // Function to handle opening the modal
-  const handleViewDetails = (ticket: ticketType) => {
+  const handleViewDetails = (ticket: TicketType) => {
     setSelectedTicket(ticket);
   };
 
-  // Function to handle closing the modal
   const handleCloseModal = () => {
     setSelectedTicket(null);
   };
@@ -236,7 +233,6 @@ const TicketsPage = () => {
                         {new Date(ticket.createdAt || 0).toLocaleDateString()}
                       </span>
                     </div>
-                    {/* Replaced Link with a button and onClick handler */}
                     <button
                       onClick={() => handleViewDetails(ticket)}
                       className="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"

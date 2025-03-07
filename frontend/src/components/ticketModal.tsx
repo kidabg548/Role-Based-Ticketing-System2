@@ -1,10 +1,10 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Clock, Tag, AlertCircle, CheckCircle2, X } from "lucide-react";
-import { ticketType } from "../../../backend/shared/types"; // Ensure correct path
+import { TicketType } from "../types/types";
 
 interface TicketModalProps {
-  ticket: ticketType;
+  ticket: TicketType;
   onClose: () => void;
 }
 
