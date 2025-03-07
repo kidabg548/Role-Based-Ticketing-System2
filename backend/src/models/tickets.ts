@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { ticketType } from "../../shared/types";
+import { ticketType } from "../shared/types";
 
 const ticketSchema: Schema<ticketType> = new Schema(
   {
