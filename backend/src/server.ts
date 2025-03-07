@@ -9,17 +9,23 @@ import cors from "cors";
 
 dotenv.config(); 
 
+const allowedOrigins: string[] = [
+    process.env.FRONTEND_URL || "",
+    process.env.ADMIN_URL || "",
+    "https://ticket-flow-nine.vercel.app",
+    "https://admin-omega-ruddy.vercel.app"
+  ].filter(origin => origin !== ""); 
+
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
     cors({
-      origin: [process.env.FRONTEND_URL ?? "", process.env.ADMIN_URL ?? "", "https://ticket-flow-nine.vercel.app/", "https://admin-omega-ruddy.vercel.app/"],
-      credentials: true
+      origin: allowedOrigins,
+      credentials: true, 
     })
   );
-  
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
     .then(() => {
