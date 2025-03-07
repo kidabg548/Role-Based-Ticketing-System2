@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
     cors({
-      origin: [process.env.FRONTEND_URL ?? "", process.env.ADMIN_URL ?? "", "https://ticket-flow-nine.vercel.app/"],
+      origin: [process.env.FRONTEND_URL ?? "", process.env.ADMIN_URL ?? "", "https://ticket-flow-nine.vercel.app/", "https://admin-omega-ruddy.vercel.app/"],
       credentials: true
     })
   );
