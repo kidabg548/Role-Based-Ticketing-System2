@@ -46,7 +46,6 @@ import {
                 </div>
               </div>
   
-              {/* In Progress Tickets Card */}
               <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold text-gray-800">In Progress</h3>
@@ -59,7 +58,6 @@ import {
                 </div>
               </div>
   
-              {/* Resolved Tickets Card */}
               <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold text-gray-800">Resolved</h3>
@@ -72,7 +70,6 @@ import {
                 </div>
               </div>
   
-              {/* Total Tickets Card */}
               <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
                 <Link to="/tickets">
                   <div className="flex items-center justify-between mb-4">
@@ -89,7 +86,6 @@ import {
             </div>
   
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Quick Actions Card */}
               <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
                 <h3 className="text-xl font-bold text-gray-900 mb-6">Quick Actions</h3>
                 <div className="grid grid-cols-2 gap-4">
@@ -111,7 +107,6 @@ import {
                 </div>
               </div>
   
-              {/* Recent Activity Card */}
               <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
                 <h3 className="text-xl font-bold text-gray-900 mb-6">Recent Activity</h3>
                 <div className="space-y-4">
@@ -164,7 +159,6 @@ import {
             Key Features
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Real-time Updates Feature Card */}
             <div className="bg-white p-6 rounded-xl shadow-lg border hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
               <Clock className="h-12 w-12 text-blue-600 mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">
@@ -175,7 +169,6 @@ import {
               </p>
             </div>
   
-            {/* Quick Resolution Feature Card */}
             <div className="bg-white p-6 rounded-xl shadow-lg border hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
               <CheckCircle className="h-12 w-12 text-blue-600 mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">
@@ -186,7 +179,6 @@ import {
               </p>
             </div>
   
-            {/* Easy Communication Feature Card */}
             <div className="bg-white p-6 rounded-xl shadow-lg border hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
               <MessageCircle className="h-12 w-12 text-blue-600 mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">
@@ -211,13 +203,11 @@ import {
                 <div className="text-blue-100">Resolution Rate</div>
               </div>
   
-              {/* Average Response Time Statistic */}
               <div>
                 <div className="text-4xl font-extrabold mb-2">2h</div>
                 <div className="text-blue-100">Average Response Time</div>
               </div>
   
-              {/* Support Available Statistic */}
               <div>
                 <div className="text-4xl font-extrabold mb-2">24/7</div>
                 <div className="text-blue-100">Support Available</div>

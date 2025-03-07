@@ -40,10 +40,8 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex bg-white">
-      {/* Left side - Animated/Visual Section */}
       <div className="hidden md:flex md:w-1/2 bg-blue-600 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800">
-          {/* Abstract animation circles */}
           <div className="absolute w-96 h-96 bg-blue-400 rounded-full opacity-20 -top-20 -left-20 animate-pulse"></div>
           <div
             className="absolute w-80 h-80 bg-blue-300 rounded-full opacity-20 bottom-10 right-10 animate-pulse"
@@ -55,7 +53,6 @@ const Login = () => {
           ></div>
         </div>
 
-        {/* Logo and welcome text */}
         <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-12 text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"

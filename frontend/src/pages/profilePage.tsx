@@ -30,8 +30,7 @@ const ProfilePage = () => {
     const handleLogout = () => {
         localStorage.removeItem("jwtToken");
         navigate("/login");
-        // consider removing reload, and redirect user to login page
-        //window.location.reload();
+      
     };
 
     if (loading) {
@@ -84,9 +83,7 @@ const ProfilePage = () => {
                     </div>
                 </div>
 
-                {/* Profile Content Section */}
                 <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Personal Information Card */}
                     <div className="bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300">
                         <div className="p-6">
                             <h2 className="text-2xl font-semibold text-gray-800 flex items-center mb-4">
@@ -100,7 +97,6 @@ const ProfilePage = () => {
                         </div>
                     </div>
 
-                    {/* Account Details Card */}
                     <div className="bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300">
                         <div className="p-6">
                             <h2 className="text-2xl font-semibold text-gray-800 flex items-center mb-4">
@@ -117,7 +113,6 @@ const ProfilePage = () => {
                         </div>
                     </div>
 
-                    {/* Contact Information Card (Optional) */}
                     {user.phone && (
                         <div className="bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300">
                             <div className="p-6">
@@ -132,7 +127,6 @@ const ProfilePage = () => {
                         </div>
                     )}
 
-                    {/* Social Links (Example - Customize as needed) */}
                     <div className="bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300">
                         <div className="p-6">
                             <h2 className="text-2xl font-semibold text-gray-800 flex items-center mb-4">
@@ -150,7 +144,6 @@ const ProfilePage = () => {
                     </div>
                 </div>
 
-                {/* Logout Button */}
                 <div className="p-8 flex justify-end">
                     <button
                         onClick={handleLogout}
