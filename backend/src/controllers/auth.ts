@@ -91,4 +91,11 @@ export const validateToken = (req: Request, res: Response) => {
     res.status(200).json({ userId: req.userId });
   };
 
+  export const logoutUser = (req: Request, res: Response) => {
+    res.cookie("auth_token", "", {
+      expires: new Date(0),
+    });
+    res.status(200).send({ message: "Logout successful" }); 
+  };
+
 export default router;

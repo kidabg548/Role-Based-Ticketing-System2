@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '../api-client';
+import { logOut } from '../api-client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faEnvelope, faPhone, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -10,7 +10,6 @@ const ProfilePage = () => {
     const [user, setUser] = useState<UserType | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchProfile() {
@@ -27,10 +26,19 @@ const ProfilePage = () => {
         fetchProfile();
     }, []);
 
-    const handleLogout = () => {
-        localStorage.removeItem("jwtToken");
-        navigate("/login");
-      
+    const handleLogout = async () => {
+        try {
+            await logOut();
+            localStorage.removeItem("jwtToken");
+            // Method 1: Reload the current page
+            window.location.reload();
+            // Method 2: Replace the current URL (more subtle)
+            // window.location.replace("/login");
+
+           
+        } catch (error: any) {
+            setError(error.message);
+        }
     };
 
     if (loading) {
@@ -66,7 +74,6 @@ const ProfilePage = () => {
     return (
         <div className="min-h-screen bg-gray-50 py-6 flex items-center justify-center">
             <div className="bg-white shadow-xl rounded-lg overflow-hidden max-w-4xl w-full mx-auto">
-                {/* Header Section */}
                 <div className="bg-gradient-to-r from-blue-400 to-purple-500 text-white py-12 px-6">
                     <div className="flex items-center justify-between">
                         <div>

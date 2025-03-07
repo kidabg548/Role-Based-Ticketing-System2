@@ -42,15 +42,12 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen flex bg-white">
-      {/* Left side - Visual/Info Section */}
       <div className="hidden md:flex md:w-1/2 bg-blue-600 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800">
-          {/* Abstract background elements */}
           <div className="absolute w-96 h-96 bg-blue-400 rounded-full opacity-20 -top-20 -left-20 animate-pulse"></div>
           <div className="absolute w-80 h-80 bg-blue-300 rounded-full opacity-20 bottom-10 right-10 animate-pulse" style={{ animationDelay: "1s" }}></div>
           <div className="absolute w-60 h-60 bg-blue-200 rounded-full opacity-20 top-1/2 left-1/3 animate-pulse" style={{ animationDelay: "2s" }}></div>
           
-          {/* Support ticket illustration */}
           <div className="absolute bottom-5 right-5 opacity-20">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" className="w-40 h-40">
               <path d="M85,15H15c-2.8,0-5,2.2-5,5v40c0,2.8,2.2,5,5,5h25v15c0,1.7,1.3,3,3,3c0.8,0,1.6-0.3,2.1-0.9L65,65h20c2.8,0,5-2.2,5-5V20 C90,17.2,87.8,15,85,15z M30,45c-2.8,0-5-2.2-5-5s2.2-5,5-5s5,2.2,5,5S32.8,45,30,45z M50,45c-2.8,0-5-2.2-5-5s2.2-5,5-5s5,2.2,5,5 S52.8,45,50,45z M70,45c-2.8,0-5-2.2-5-5s2.2-5,5-5s5,2.2,5,5S72.8,45,70,45z"></path>
@@ -58,7 +55,6 @@ const Signup = () => {
           </div>
         </div>
         
-        {/* Content overlay */}
         <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-12 text-white">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-20 h-20 mb-6">
             <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd" />
@@ -92,7 +88,6 @@ const Signup = () => {
         </div>
       </div>
       
-      {/* Right side - Signup Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6">
         <div className="max-w-md w-full">
           <h2 className="text-3xl font-bold mb-2 text-gray-800">Create Account</h2>

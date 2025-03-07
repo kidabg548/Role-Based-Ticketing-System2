@@ -4,12 +4,13 @@ import {
     MessageCircle,
     ArrowRight,
   } from "lucide-react";
-  import { Link } from "react-router-dom";
+  import { Link, useNavigate } from "react-router-dom";
   import { useAppContext } from "../contexts/AppContext";
   import { useEffect } from "react";
   
   const Home = () => {
     const { isLoggedIn } = useAppContext();
+    const navigate = useNavigate();
   
     useEffect(() => {
       document.body.classList.add("bg-gradient-to-br", "from-blue-50", "to-white");
@@ -18,6 +19,10 @@ import {
         document.body.classList.add("bg-white");
       };
     }, []);
+  
+      const handleGetStartedClick = () => {
+        navigate('/login');
+      };
   
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-24">
@@ -33,56 +38,53 @@ import {
             </div>
   
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-              {/* Open Tickets Card */}
-              <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
+            <Link to="/tickets" className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 block">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold text-gray-800">Open Tickets</h3>
                   <span className="text-3xl font-bold text-blue-600">3</span>
                 </div>
                 <div className="flex justify-end">
-                  <button className="text-blue-500 hover:text-blue-700 text-sm font-medium flex items-center gap-1 transition-colors duration-200">
+                  <span className="text-blue-500 hover:text-blue-700 text-sm font-medium flex items-center gap-1 transition-colors duration-200">
                     View All <ArrowRight className="h-4 w-4" />
-                  </button>
+                  </span>
                 </div>
-              </div>
+              </Link>
   
-              <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
+              <Link to="/tickets" className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 block">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold text-gray-800">In Progress</h3>
                   <span className="text-3xl font-bold text-yellow-600">2</span>
                 </div>
                 <div className="flex justify-end">
-                  <button className="text-yellow-500 hover:text-yellow-700 text-sm font-medium flex items-center gap-1 transition-colors duration-200">
+                  <span className="text-yellow-500 hover:text-yellow-700 text-sm font-medium flex items-center gap-1 transition-colors duration-200">
                     View All <ArrowRight className="h-4 w-4" />
-                  </button>
+                  </span>
                 </div>
-              </div>
+              </Link>
   
-              <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
+              <Link to="/tickets" className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 block">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold text-gray-800">Resolved</h3>
                   <span className="text-3xl font-bold text-green-600">8</span>
                 </div>
                 <div className="flex justify-end">
-                  <button className="text-green-500 hover:text-green-700 text-sm font-medium flex items-center gap-1 transition-colors duration-200">
+                  <span className="text-green-500 hover:text-green-700 text-sm font-medium flex items-center gap-1 transition-colors duration-200">
                     View All <ArrowRight className="h-4 w-4" />
-                  </button>
+                  </span>
                 </div>
-              </div>
+              </Link>
   
-              <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
-                <Link to="/tickets">
+              <Link to="/tickets" className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 block">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-semibold text-gray-800">Total Tickets</h3>
                     <span className="text-3xl font-bold text-purple-600">13</span>
                   </div>
-                </Link>
                 <div className="flex justify-end">
-                  <button className="text-purple-500 hover:text-purple-700 text-sm font-medium flex items-center gap-1 transition-colors duration-200">
+                  <span className="text-purple-500 hover:text-purple-700 text-sm font-medium flex items-center gap-1 transition-colors duration-200">
                     View History <ArrowRight className="h-4 w-4" />
-                  </button>
+                  </span>
                 </div>
-              </div>
+              </Link>
             </div>
   
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -144,7 +146,7 @@ import {
               Create, track, and resolve support tickets effortlessly. Get the help you need, when you need it.
             </p>
             <div className="flex justify-center gap-4 animate__animated animate__fadeInUp">
-              <button className="bg-blue-600 text-white px-8 py-4 text-lg rounded-xl hover:bg-blue-700 transition-colors duration-300 flex items-center gap-2 shadow-md hover:shadow-lg cursor-pointer transform hover:scale-105">
+              <button onClick={handleGetStartedClick} className="bg-blue-600 text-white px-8 py-4 text-lg rounded-xl hover:bg-blue-700 transition-colors duration-300 flex items-center gap-2 shadow-md hover:shadow-lg cursor-pointer transform hover:scale-105">
                 Get Started <ArrowRight className="h-5 w-5" />
               </button>
               <button className="border border-gray-300 text-gray-700 px-8 py-4 text-lg rounded-xl hover:bg-gray-50 transition-colors duration-300 hover:shadow-md cursor-pointer transform hover:scale-105">
@@ -197,21 +199,26 @@ import {
           </h2>
           <div className="bg-blue-600 rounded-xl p-8 text-white text-center shadow-lg">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Resolution Rate Statistic */}
+            <Link to="/about" >
               <div>
                 <div className="text-4xl font-extrabold mb-2">99%</div>
                 <div className="text-blue-100">Resolution Rate</div>
               </div>
+              </Link>
   
+              <Link to="/about" >
               <div>
                 <div className="text-4xl font-extrabold mb-2">2h</div>
                 <div className="text-blue-100">Average Response Time</div>
               </div>
+              </Link>
   
+              <Link to="/about" >
               <div>
                 <div className="text-4xl font-extrabold mb-2">24/7</div>
                 <div className="text-blue-100">Support Available</div>
               </div>
+              </Link>
             </div>
           </div>
         </section>
