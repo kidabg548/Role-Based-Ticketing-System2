@@ -13,7 +13,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Handle scroll effect for navigation
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -23,7 +22,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
@@ -35,7 +33,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
             <Link to="/" className="flex items-center group">
               <div className="relative">
                 <Ticket className="h-9 w-9 text-blue-600 transform transition-all duration-300 group-hover:rotate-12" />
@@ -103,7 +100,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               )}
             </nav>
 
-            {/* Mobile menu button */}
             <button
               className="md:hidden rounded-md p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 focus:outline-none"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -113,7 +109,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
         </div>
 
-        {/* Mobile menu */}
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${
           mobileMenuOpen ? "max-h-96 border-t border-gray-100" : "max-h-0"
         }`}>

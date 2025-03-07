@@ -10,7 +10,7 @@ interface TicketModalProps {
 
 const TicketModal: React.FC<TicketModalProps> = ({ ticket, onClose }) => {
   const getPriorityColor = (priority: string) => {
-    const priorityLower = priority.toLowerCase(); // Ensure lower case
+    const priorityLower = priority.toLowerCase(); 
     const colors: { [key: string]: string } = {
       high: "bg-red-100 text-red-700",
       medium: "bg-yellow-100 text-yellow-700",
@@ -21,7 +21,7 @@ const TicketModal: React.FC<TicketModalProps> = ({ ticket, onClose }) => {
   };
 
   const getStatusColor = (status: string) => {
-    const statusLower = status.toLowerCase(); // Ensure lower case
+    const statusLower = status.toLowerCase(); 
     const colors: { [key: string]: string } = {
       open: "bg-blue-100 text-blue-700",
       "in progress": "bg-purple-100 text-purple-700",
@@ -55,7 +55,7 @@ const TicketModal: React.FC<TicketModalProps> = ({ ticket, onClose }) => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl"
+          className="relative w-full max-w-lg bg-gray-300 rounded-2xl shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
